@@ -8,24 +8,17 @@ function PolyExchange() {
   const [modalContent, setModalContent] = useState({ title: '', content: '' });
   const [email, setEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const canvasRef = useRef(null);
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
-    
-    const handleMouseMove = (e) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
-    };
 
     window.addEventListener('scroll', handleScroll);
-    window.addEventListener('mousemove', handleMouseMove);
     
     return () => {
       window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('mousemove', handleMouseMove);
     };
   }, []);
 
@@ -733,7 +726,7 @@ function PolyExchange() {
           {/* Desktop Navigation */}
           <div style={{ display: 'flex', gap: '32px', alignItems: 'center' }} className="desktop-nav">
             {['Markets', 'How It Works', 'Features', 'Pricing', 'FAQ'].map((item) => (
-              <a
+              <div
                 key={item}
                 onClick={() => smoothScroll(item.toLowerCase().replace(/ /g, '-'))}
                 style={{
@@ -758,7 +751,7 @@ function PolyExchange() {
                 }}
               >
                 {item}
-              </a>
+              </div>
             ))}
             <button
               onClick={() => openModal('Sign In', 'Welcome back to Poly Exchange! Sign in to access your account, view your portfolio, and continue trading on the world\'s most accurate prediction markets. Your secure dashboard awaits with real-time market data and performance analytics.')}
